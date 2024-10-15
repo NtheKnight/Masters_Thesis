@@ -96,6 +96,9 @@ minimap2 -ax splice -k14 -uf --secondary=no /hpc--/data/reference_genomes/Hybrid
     samtools view -f16 -b -o $OUT/"$NAME"."$TRIMTYPE"."$VERSION".HG38align.sorted.FOXP3.bam $OUT/"$NAME"."$TRIMTYPE"."$VERSION".HG38align.sorted.bam chrX:49250438-49300000
     samtools index $OUT/"$NAME"."$TRIMTYPE"."$VERSION".HG38align.sorted.FOXP3.bam
 
+#extracts read length of all FOXP3 aligning reads 
+samtools view $OUT/"$NAME"."$TRIMTYPE"."$VERSION".HG38align.sorted.FOXP3.bam | cut -f10 | awk '{print length}' > $IN/02_results/readlength.FOXP3.aligning.txt
+
 #extracting IDs, with length of poly-A tail into a .txt
 ####this part requieres dorado to have run in the -pt mode, to create the PolyA.bam, else this code wont work!###
 
